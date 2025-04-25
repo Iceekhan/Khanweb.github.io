@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Student Grade Checker</title>
+    <style>
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background: linear-gradient(135deg, #e0f7fa, #c9e4f7, #ffd6d6);
+        display: flex;
+        justify-content: center;
+        padding: 3rem 1rem;
+      }
+
+      .container {
+        background: #fff;
+        padding: 2rem;
+        border-radius: 2rem;
+        max-width: 700px;
+        width: 100%;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 2rem;
+        color: #333;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+        color: #555;
+      }
+
+      input[type="number"] {
+        width: 100%;
+        padding: 0.7rem;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        font-size: 1rem;
+        transition: 0.3s;
+      }
+
+      input[type="number"]:focus {
+        border-color: #0077b6;
+        box-shadow: 0 0 5px rgba(0, 119, 182, 0.4);
+        outline: none;
+      }
+
+      .subject-btn {
+        margin-top: 0.5rem;
+        padding: 0.6rem 1rem;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        font-size: 0.95rem;
+        background: linear-gradient(to right, #00b4d8, #0077b6);
+        color: white;
+        cursor: pointer;
+        transition: 0.3s ease;
+      }
+
+      .subject-btn:hover {
+        background: linear-gradient(to right, #0077b6, #00b4d8);
+        transform: scale(1.05);
+      }
+
+      .grade-output {
+        margin-top: 0.5rem;
+        font-size: 1rem;
+        font-weight: bold;
+        color: #444;
+      }
+
+      .button-group {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+
+      .main-btn {
+        flex: 1;
+        padding: 0.9rem;
+        font-size: 1.1rem;
+        font-weight: bold;
+        border: none;
+        border-radius: 1rem;
+        cursor: pointer;
+        color: white;
+        transition: all 0.3s ease;
+      }
+
+      .calculate-btn {
+        background: linear-gradient(to right, #38b000, #70e000);
+      }
+
+      .calculate-btn:hover {
+        background: linear-gradient(to right, #70e000, #38b000);
+        transform: translateY(-2px);
+      }
+
+      .reset-btn {
+        background: linear-gradient(to right, #ef476f, #d90429);
+      }
+
+      .reset-btn:hover {
+        background: linear-gradient(to right, #d90429, #ef476f);
+        transform: translateY(-2px);
+      }
+
+      .result {
+        margin-top: 2rem;
+        background: #f1f1f1;
+        padding: 1.5rem;
+        border-radius: 1.2rem;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      .grade-line {
+        margin-bottom: 0.8rem;
+      }
+
+      hr {
+        margin: 1.5rem 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>📘 Grade Checker create by Khann</h1>
+
+      <div class="form-group">
+        <label for="math">Math (Max 125):</label>
+        <input type="number" id="math" />
+        <button class="subject-btn" onclick="checkSingleGrade('math', 125)">
+          Check Grade
+        </button>
+        <div id="grade-math" class="grade-output"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="physics">Physics (Max 75):</label>
+        <input type="number" id="physics" />
+        <button class="subject-btn" onclick="checkSingleGrade('physics', 75)">
+          Check Grade
+        </button>
+        <div id="grade-physics" class="grade-output"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="chemistry">Chemistry (Max 75):</label>
+        <input type="number" id="chemistry" />
+        <button class="subject-btn" onclick="checkSingleGrade('chemistry', 75)">
+          Check Grade
+        </button>
+        <div id="grade-chemistry" class="grade-output"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="biology">Biology (Max 75):</label>
+        <input type="number" id="biology" />
+        <button class="subject-btn" onclick="checkSingleGrade('biology', 75)">
+          Check Grade
+        </button>
+        <div id="grade-biology" class="grade-output"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="khmer">Khmer (Max 75):</label>
+        <input type="number" id="khmer" />
+        <button class="subject-btn" onclick="checkSingleGrade('khmer', 75)">
+          Check Grade
+        </button>
+        <div id="grade-khmer" class="grade-output"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="history">History (Max 50):</label>
+        <input type="number" id="history" />
+        <button class="subject-btn" onclick="checkSingleGrade('history', 50)">
+          Check Grade
+        </button>
+        <div id="grade-history" class="grade-output"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="english">English (Max 50):</label>
+        <input type="number" id="english" />
+        <button class="subject-btn" onclick="checkSingleGrade('english', 50)">
+          Check Grade
+        </button>
+        <div id="grade-english" class="grade-output"></div>
+      </div>
+
+      <div class="button-group">
+        <button class="main-btn calculate-btn" onclick="calculateTotal()">
+          Calculate Total Grade
+        </button>
+        <button class="main-btn reset-btn" onclick="resetForm()">Reset</button>
+      </div>
+
+      <div id="result" class="result"></div>
+    </div>
+
+    <script>
+      function getGrade(score, max) {
+        const percent = (score / max) * 100;
+        if (percent >= 90) return "A";
+        else if (percent >= 80) return "B";
+        else if (percent >= 70) return "C";
+        else if (percent >= 60) return "D";
+        else if (percent >= 50) return "E";
+        else return "F";
+      }
+
+      function checkSingleGrade(id, max) {
+        const val = parseFloat(document.getElementById(id).value);
+        if (isNaN(val)) {
+          document.getElementById("grade-" + id).innerText =
+            "Please enter a valid number.";
+          return;
+        }
+        const grade = getGrade(val, max);
+        document.getElementById("grade-" + id).innerText = `Grade: ${grade}`;
+      }
+
+      function calculateTotal() {
+        const subjects = [
+          { id: "math", name: "Math", max: 125 },
+          { id: "physics", name: "Physics", max: 75 },
+          { id: "chemistry", name: "Chemistry", max: 75 },
+          { id: "biology", name: "Biology", max: 75 },
+          { id: "khmer", name: "Khmer", max: 75 },
+          { id: "history", name: "History", max: 50 },
+          { id: "english", name: "English", max: 50 },
+        ];
+
+        let total = 0;
+        let totalMax = 0;
+        let output = "";
+
+        for (let subject of subjects) {
+          const score =
+            parseFloat(document.getElementById(subject.id).value) || 0;
+          const grade = getGrade(score, subject.max);
+          output += `<div class="grade-line">${subject.name}: ${score} → Grade <strong>${grade}</strong></div>`;
+          total += score;
+          totalMax += subject.max;
+        }
+
+        const totalGrade = getGrade(total, totalMax);
+        output += `<hr><div class="grade-line"><strong>Total Score: ${total} / ${totalMax}</strong></div>`;
+        output += `<div class="grade-line"><strong>Total Grade: ${totalGrade}</strong></div>`;
+
+        document.getElementById("result").innerHTML = output;
+      }
+
+      function resetForm() {
+        const inputs = document.querySelectorAll('input[type="number"]');
+        inputs.forEach((input) => (input.value = ""));
+
+        const grades = document.querySelectorAll(".grade-output");
+        grades.forEach((div) => (div.innerText = ""));
+
+        document.getElementById("result").innerHTML = "";
+      }
+    </script>
+  </body>
+</html>
